@@ -9,6 +9,11 @@ const ABOUT_PORT = process.env.ABOUT_PORT || 50001
 const REVIEWS_PORT = process.env.REVIEWS_PORT || 50000
 
 // const REVIEWS_HOSTNAME = 'ec2-3-135-64-232.us-east-2.compute.amazonaws.com' || 'localhost'
+const BOOKING_HOSTNAME = process.env.BOOKING_HOSTNAME || 'localhost'
+const CAROUSEL_HOSTNAME = process.env.CAROUSEL_HOSTNAME || 'localhost'
+const ABOUT_HOSTNAME = process.env.ABOUT_HOSTNAME || 'localhost'
+const REVIEWS_HOSTNAME = process.env.REVIEWS_HOSTNAME || 'localhost'
+
 
 app.use(express.json());
 
@@ -27,16 +32,16 @@ const static = `<!DOCTYPE html>
     <div id="carousel"></div>
     <div id="about"></div>
     <div id="reviews"></div>
-    <script src="http://localhost:${BOOKING_PORT}/bundle.js" ></script>
-    <script src="http://localhost:${CAROUSEL_PORT}/bundle.js" ></script>
-    <script src="http://localhost:${REVIEWS_PORT}/bundle.js" ></script>
-    <script src="http://localhost:${ABOUT_PORT}/bundle.js" ></script>
+    <script src="http://${BOOKING_HOSTNAME}:${BOOKING_PORT}/bundle.js" ></script>
+    <script src="http://${CAROUSEL_HOSTNAME}:${CAROUSEL_PORT}/bundle.js" ></script>
+    <script src="http://${REVIEWS_HOSTNAME}:${REVIEWS_PORT}/bundle.js" ></script>
+    <script src="http://${ABOUT_HOSTNAME}:${ABOUT_PORT}/bundle.js" ></script>
   </body>
 </html>`
 
 app.post('/api/booking/:id', (req, res) => {
   console.log(req.body)
-  axios.post(`http://localhost:${BOOKING_PORT}${req.url}`, {...req.body})
+  axios.post(`http://${BOOKING_HOSTNAME}:${BOOKING_PORT}${req.url}`, {...req.body})
     .then(data => data.data)
     .then(data => {
       console.log(data)
@@ -45,21 +50,21 @@ app.post('/api/booking/:id', (req, res) => {
 });
 
 app.get('/api/carousel/:id', (req, res) => {
-  axios.get(`http://localhost:${CAROUSEL_PORT}${req.url}`)
+  axios.get(`http://${CAROUSEL_HOSTNAME}:${CAROUSEL_PORT}${req.url}`)
   .then(response => response.data)
   .then(data => res.send(data))
   .catch(err => console.log('error at proxy serving about',err));
 });
 
 app.get('/api/about/:id', (req, res) => {
-  axios.get(`http://localhost:${ABOUT_PORT}${req.url}`)
+  axios.get(`http://${ABOUT_HOSTNAME}:${ABOUT_PORT}${req.url}`)
   .then(response => response.data)
   .then(data => res.send(data))
   .catch(err => console.log('error at proxy serving about',err));
 });
 
 app.get('/api/reviews/:id', (req, res) => {
-  axios.get(`http://localhost:${REVIEWS_PORT}${req.url}`)
+  axios.get(`http://${REVIEWS_HOSTNAME}:${REVIEWS_PORT}${req.url}`)
   .then(response => response.data)
   .then(data => res.send(data))
   .catch(err => console.log('error at proxy serving about',err));
