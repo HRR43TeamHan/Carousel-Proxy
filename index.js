@@ -28,10 +28,14 @@ const static = `<!DOCTYPE html>
     <title>HRR43 FEC TeamHan!</title>
   </head>
   <body>
-    <div id="booking"></div>
-    <div id="carousel"></div>
+  <div style="margin: 0 6% 0 6%;">
+    <div style="display:flex">
+      <div id="booking" ></div>
+      <div id="carousel" ></div>
+    </div>
     <div id="about"></div>
     <div id="reviews"></div>
+  </div>
     <script src="http://${BOOKING_HOSTNAME}:${BOOKING_PORT}/bundle.js" ></script>
     <script src="http://${CAROUSEL_HOSTNAME}:${CAROUSEL_PORT}/bundle.js" ></script>
     <script src="http://${REVIEWS_HOSTNAME}:${REVIEWS_PORT}/bundle.js" ></script>
